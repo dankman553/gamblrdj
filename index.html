@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>$GAMBLR - DJ Dev Coin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: #000;
+      color: #0f0;
+      overflow-x: hidden;
+    }
+
+    .neon-glow {
+      text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 20px #0f0;
+    }
+
+    #dj-unlock {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: radial-gradient(circle, #0f0, #00f);
+      animation: pulseBg 5s infinite;
+    }
+
+    @keyframes pulseBg {
+      0% { background: radial-gradient(circle, #0f0, #00f); }
+      50% { background: radial-gradient(circle, #00f, #0f0); }
+      100% { background: radial-gradient(circle, #0f0, #00f); }
+    }
+
+    #deck {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      margin: 20px 0;
+    }
+
+    .turntable {
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle at center, #222 30%, #000 70%);
+      border-radius: 50%;
+      border: 5px solid #0f0;
+      box-shadow: 0 0 20px #0f0;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .turntable:hover {
+      transform: scale(1.1);
+    }
+
+    .turntable::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 30px;
+      height: 30px;
+      background: #f00;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 10px #f00;
+    }
+
+    .turntable::after {
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: 50%;
+      width: 6px;
+      height: 50px;
+      background: #0f0;
+      transform: translateX(-50%);
+    }
+
+    .spinning {
+      animation: spin 2s linear;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    button {
+      background: #000;
+      color: #0f0;
+      border: 2px solid #0f0;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+
+    #main-site {
+      display: none;
+    }
+
+    .section {
+      min-height: 100vh;
+      padding: 100px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #welcome {
+      background: url('https://media.giphy.com/media/l3vR1WzvRxJba/giphy.gif') no-repeat center center/cover;
+      color: white;
+      animation: neonPulse 3s infinite;
+    }
+
+    @keyframes neonPulse {
+      0%, 100% { text-shadow: 0 0 5px #fff, 0 0 10px #0ff, 0 0 20px #0ff; }
+      50% { text-shadow: 0 0 10px #fff, 0 0 20px #0ff, 0 0 30px #0ff; }
+    }
+
+    #how-to-buy, #tokenomics {
+      background: #111;
+      color: #0ff;
+    }
+
+    .card {
+      background: #000;
+      border: 2px solid #0ff;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 0 25px #0ff;
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+    }
+
+    .card h3 {
+      color: #f0f;
+    }
+
+    .card p {
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div id="dj-unlock">
+    <h1 class="neon-glow">🎧 Mix to Unlock $GAMBLR</h1>
+    <div id="deck">
+      <div class="turntable" id="tt1"></div>
+      <div class="turntable" id="tt2"></div>
+    </div>
+    <button onclick="tryUnlock()">Let Me In</button>
+  </div>
+
+  <div id="main-site">
+    <section class="section" id="welcome">
+      <h1 class="neon-glow">🎉 Welcome to $GAMBLR</h1>
+      <p>The DJ dev is spinning 24/7 until we hit the moon!</p>
+      <audio autoplay loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+      </audio>
+    </section>
+
+    <section class="section" id="how-to-buy">
+      <h2 class="neon-glow">🛒 How to Buy</h2>
+      <div class="card">
+        <h3>🎧 Step 1: Create a Wallet</h3>
+        <p>Download Phantom or Solflare Wallet and top it up with SOL.</p>
+      </div>
+      <div class="card">
+        <h3>🎚️ Step 2: Head to a DEX</h3>
+        <p>Visit Jupiter or Raydium and connect your wallet.</p>
+      </div>
+      <div class="card">
+        <h3>💿 Step 3: Buy $GAMBLR</h3>
+        <p>Swap your SOL for $GAMBLR. Welcome to the party!</p>
+      </div>
+    </section>
+
+    <section class="section" id="tokenomics">
+      <h2 class="neon-glow">📊 Tokenomics</h2>
+      <div class="card">
+        <h3>🌀 Supply</h3>
+        <p>1,000,000,000 $GAMBLR tokens — all out, all in.</p>
+      </div>
+      <div class="card">
+        <h3>💥 Launch Style</h3>
+        <p>Zero tax, zero team wallet — pure community vibes.</p>
+      </div>
+      <div class="card">
+        <h3>🪩 Party Mode</h3>
+        <p>Every holder gets exclusive access to DJ drops and community events.</p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    let spunTT1 = false;
+    let spunTT2 = false;
+
+    document.getElementById('tt1').addEventListener('click', () => {
+      const tt = document.getElementById('tt1');
+      tt.classList.add('spinning');
+      spunTT1 = true;
+      setTimeout(() => tt.classList.remove('spinning'), 2000);
+    });
+
+    document.getElementById('tt2').addEventListener('click', () => {
+      const tt = document.getElementById('tt2');
+      tt.classList.add('spinning');
+      spunTT2 = true;
+      setTimeout(() => tt.classList.remove('spinning'), 2000);
+    });
+
+    function tryUnlock() {
+      if (spunTT1 && spunTT2) {
+        document.getElementById('dj-unlock').style.display = 'none';
+        document.getElementById('main-site').style.display = 'block';
+      } else {
+        alert("Spin both decks to unlock the site!");
+      }
+    }
+  </script>
+</body>
+</html>
