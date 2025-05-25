@@ -16,13 +16,13 @@
       padding: 0;
       font-family: 'Orbitron', sans-serif;
       background: #000;
-      color: #0f0;
+      color: #f00;
       overflow-x: hidden;
       height: 100%;
     }
 
     .neon-glow {
-      text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 20px #0f0;
+      text-shadow: 0 0 5px #f00, 0 0 10px #ff4500, 0 0 20px #ff6347; /* Glowing red and orange shades */
     }
 
     #dj-unlock {
@@ -31,14 +31,19 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      background: radial-gradient(circle, #0f0, #00f);
+      background: radial-gradient(circle, #f00, #ff4500); /* Red to Orange gradient */
       animation: pulseBg 5s infinite;
     }
 
+    #dj-unlock h1 {
+      color: #fff; /* White text for visibility */
+      text-shadow: 0 0 5px #fff, 0 0 10px #ff4500, 0 0 20px #ff6347; /* Glow with red-orange shades */
+    }
+
     @keyframes pulseBg {
-      0% { background: radial-gradient(circle, #0f0, #00f); }
-      50% { background: radial-gradient(circle, #00f, #0f0); }
-      100% { background: radial-gradient(circle, #0f0, #00f); }
+      0% { background: radial-gradient(circle, #f00, #ff4500); }
+      50% { background: radial-gradient(circle, #ff4500, #f00); }
+      100% { background: radial-gradient(circle, #f00, #ff4500); }
     }
 
     #deck {
@@ -53,8 +58,8 @@
       height: 180px;
       background: radial-gradient(circle at center, #222 30%, #000 70%);
       border-radius: 50%;
-      border: 5px solid #0f0;
-      box-shadow: 0 0 20px #0f0;
+      border: 5px solid #ff4500; /* Orange border */
+      box-shadow: 0 0 20px #ff4500; /* Orange glow */
       position: relative;
       cursor: pointer;
       transition: transform 0.3s;
@@ -71,10 +76,10 @@
       left: 50%;
       width: 30px;
       height: 30px;
-      background: #f00;
+      background: #ff6347; /* Lighter orange */
       border-radius: 50%;
       transform: translate(-50%, -50%);
-      box-shadow: 0 0 10px #f00;
+      box-shadow: 0 0 10px #ff6347;
     }
 
     .turntable::after {
@@ -84,7 +89,7 @@
       left: 50%;
       width: 6px;
       height: 50px;
-      background: #0f0;
+      background: #f00; /* Red */
       transform: translateX(-50%);
     }
 
@@ -99,12 +104,18 @@
 
     button {
       background: #000;
-      color: #0f0;
-      border: 2px solid #0f0;
+      color: #fff; /* White text for buttons */
+      border: 2px solid #ff4500; /* Orange border */
       padding: 10px 20px;
       cursor: pointer;
       font-size: 16px;
       margin-top: 20px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    button:hover {
+      background: #ff4500; /* Orange background */
+      color: #fff; /* White text on hover */
     }
 
     #main-site {
@@ -136,27 +147,31 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      z-index: -1; /* Keeps the video behind the content */
+      z-index: -1;
     }
 
     @keyframes neonPulse {
-      0%, 100% { text-shadow: 0 0 5px #fff, 0 0 10px #0ff, 0 0 20px #0ff; }
-      50% { text-shadow: 0 0 10px #fff, 0 0 20px #0ff, 0 0 30px #0ff; }
+      0%, 100% { text-shadow: 0 0 5px #fff, 0 0 10px #f00, 0 0 20px #ff4500; }
+      50% { text-shadow: 0 0 10px #fff, 0 0 20px #ff4500, 0 0 30px #ff6347; }
     }
 
     #how-to-buy, #tokenomics {
-      background: #111;
-      color: #0ff;
+      background: radial-gradient(circle, #f00, #ff6347); /* Red to Orange gradient */
+      color: #fff;
+      padding: 100px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
 
     .card {
-      background: #000;
-      border: 2px solid #0ff;
+      background: rgba(0, 0, 0, 0.7);
+      border: 2px solid #ff6347; /* Orange border */
       padding: 20px;
       margin: 20px auto;
       max-width: 600px;
       border-radius: 10px;
-      box-shadow: 0 0 25px #0ff;
+      box-shadow: 0 0 25px #ff6347; /* Orange glow */
       transition: transform 0.3s;
     }
 
@@ -165,7 +180,7 @@
     }
 
     .card h3 {
-      color: #f0f;
+      color: #ff4500; /* Orange */
     }
 
     .card p {
@@ -191,27 +206,34 @@
       transform: scale(1.1);
     }
 
-    /* Logo Styling */
     #logo {
       position: absolute;
-      top: 30%; /* Adjusted to move the logo lower */
+      top: 30%;
       left: 50%;
       transform: translateX(-50%);
-      width: 350px; /* Increased size of the logo */
-      animation: bounce 1s infinite; /* Apply bounce animation */
-      box-shadow: 0 0 10px #0ff, 0 0 20px #0ff; /* Glowing outline */
+      width: 350px;
+      animation: bounce 1s infinite;
+      box-shadow: 0 0 10px #ff4500, 0 0 20px #ff6347;
     }
 
-    /* Bounce Animation for the Logo */
     @keyframes bounce {
       0%, 100% {
-        transform: translateX(-50%) translateY(0); /* Start and end at the same position */
+        transform: translateX(-50%) translateY(0);
       }
       50% {
-        transform: translateX(-50%) translateY(-20px); /* Move up at the middle of the animation */
+        transform: translateX(-50%) translateY(-20px);
       }
     }
 
+    .background-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
   </style>
 </head>
 <body>
@@ -238,8 +260,7 @@
 
   <div id="main-site">
     <section class="section" id="welcome">
-      <!-- Video background -->
-      <video autoplay muted loop>
+      <video autoplay muted loop class="background-video">
         <source src="https://videos.pexels.com/video-files/18526834/uhd_30fps.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
@@ -248,8 +269,6 @@
       <audio autoplay loop>
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
       </audio>
-
-      <!-- Logo on top of the video -->
       <img src="logo.png" alt="Logo" id="logo">
     </section>
 
@@ -298,27 +317,22 @@
       ></iframe>
     </section>
 
-    <section class="section" id="dj-board" style="background:#000 url('/mnt/data/4fe5e0a0-be5b-4fa1-910d-6989777687f7.png') no-repeat center center/cover; color:#0f0;">
+    <section class="section" id="dj-board" style="background:#000 url('/mnt/data/4fe5e0a0-be5b-4fa1-910d-6989777687f7.png') no-repeat center center/cover; color:#f00;">
       <h2 class="neon-glow">🎚️ DJ Live Deck</h2>
       <p style="text-align:center;">Drop your beats, scratch, and mix like a real DJ.</p>
-      <div style="max-width:1200px;margin:40px auto;position:relative;height:700px;border-radius:12px;box-shadow:0 0 30px #0f0;">
-        <!-- Jogwheel Visuals -->
-        <div style="position:absolute;top:150px;left:150px;width:180px;height:180px;border-radius:50%;background:#111 url('/mnt/data/db220221-6795-4697-a95e-cd230c7d580f.png') center center/cover;border:4px solid lime;box-shadow:0 0 20px lime;"></div>
-        <div style="position:absolute;top:150px;right:150px;width:180px;height:180px;border-radius:50%;background:#111 url('/mnt/data/db220221-6795-4697-a95e-cd230c7d580f.png') center center/cover;border:4px solid lime;box-shadow:0 0 20px lime;"></div>
+      <div style="max-width:1200px;margin:40px auto;position:relative;height:700px;border-radius:12px;box-shadow:0 0 30px #ff4500;">
+        <div style="position:absolute;top:150px;left:150px;width:180px;height:180px;border-radius:50%;background:#111 url('/mnt/data/db220221-6795-4697-a95e-cd230c7d580f.png') center center/cover;border:4px solid #ff4500;box-shadow:0 0 20px #ff6347;"></div>
+        <div style="position:absolute;top:150px;right:150px;width:180px;height:180px;border-radius:50%;background:#111 url('/mnt/data/db220221-6795-4697-a95e-cd230c7d580f.png') center center/cover;border:4px solid #ff4500;box-shadow:0 0 20px #ff6347;"></div>
 
-        <!-- Deck Buttons -->
-        <button onclick="playDeck('track1')" style="position:absolute;top:350px;left:180px;width:100px;height:35px;background:#000;color:#0f0;border:2px solid #0f0;border-radius:6px;">▶ Play A</button>
-        <button onclick="playDeck('track2')" style="position:absolute;top:350px;right:180px;width:100px;height:35px;background:#000;color:#0f0;border:2px solid #0f0;border-radius:6px;">▶ Play B</button>
+        <button onclick="playDeck('track1')" style="position:absolute;top:350px;left:180px;width:100px;height:35px;background:#000;color:#ff4500;border:2px solid #ff4500;border-radius:6px;">▶ Play A</button>
+        <button onclick="playDeck('track2')" style="position:absolute;top:350px;right:180px;width:100px;height:35px;background:#000;color:#ff4500;border:2px solid #ff4500;border-radius:6px;">▶ Play B</button>
 
-        <!-- Crossfader -->
-        <label for="crossfader" style="position:absolute;top:420px;left:calc(50% - 50px);color:#0f0;font-size:14px;">Crossfader</label>
+        <label for="crossfader" style="position:absolute;top:420px;left:calc(50% - 50px);color:#ff4500;font-size:14px;">Crossfader</label>
         <input type="range" min="0" max="100" value="50" id="crossfader" style="position:absolute;top:450px;left:calc(50% - 150px);width:300px;">
 
-        <!-- Volume -->
-        <label for="volume" style="position:absolute;top:500px;left:calc(50% - 50px);color:#0f0;font-size:14px;">Volume</label>
+        <label for="volume" style="position:absolute;top:500px;left:calc(50% - 50px);color:#ff4500;font-size:14px;">Volume</label>
         <input type="range" id="volume" min="0" max="1" step="0.01" value="1" onchange="setVolume(this.value)" style="position:absolute;top:530px;left:calc(50% - 150px);width:300px;">
 
-        <!-- Stop -->
         <button onclick="stopAllSounds()" style="position:absolute;top:580px;left:calc(50% - 50px);width:100px;height:35px;background:#000;color:red;border:2px solid red;border-radius:6px;">⛔ Stop</button>
       </div>
     </section>
@@ -327,21 +341,17 @@
     <audio id="track2" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"></audio>
 
     <script>
-      // Confetti effect targeting specific areas (video and logo area)
       function startConfetti(x, y) {
         confetti({
           particleCount: 150,
           spread: 180,
           origin: { x: x, y: y },
-          scalar: 0.7,  // Bigger confetti particles
+          scalar: 0.7,
         });
       }
-      
-      // Trigger confetti around the video
-      startConfetti(0.5, 0.5);  // Center of the video area
-      
-      // Trigger confetti around the logo
-      startConfetti(0.5, 0.35);  // Center around the logo
+
+      startConfetti(0.5, 0.5);
+      startConfetti(0.5, 0.35);
 
       const tracks = {
         track1: document.getElementById('track1'),
@@ -370,9 +380,7 @@
           track.volume = val;
         });
       }
-    </script>
 
-    <script>
       let spunTT1 = false;
       let spunTT2 = false;
 
