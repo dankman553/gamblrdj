@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>$GAMBLR - DJ Dev Coin</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
   <style>
     * {
       box-sizing: border-box;
@@ -17,6 +18,7 @@
       background: #000;
       color: #0f0;
       overflow-x: hidden;
+      height: 100%;
     }
 
     .neon-glow {
@@ -118,9 +120,23 @@
     }
 
     #welcome {
-      background: url('https://media.giphy.com/media/l3vR1WzvRxJba/giphy.gif') no-repeat center center/cover;
+      position: relative;
+      width: 100%;
+      z-index: 1;
+      height: 100vh;
+      text-align: center;
       color: white;
       animation: neonPulse 3s infinite;
+    }
+
+    #welcome video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1; /* Keeps the video behind the content */
     }
 
     @keyframes neonPulse {
@@ -155,9 +171,62 @@
     .card p {
       color: #ccc;
     }
+
+    #social-icons {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 15px;
+      z-index: 1000;
+    }
+
+    .social-icon img {
+      width: 40px;
+      height: 40px;
+      transition: transform 0.3s ease;
+    }
+
+    .social-icon:hover img {
+      transform: scale(1.1);
+    }
+
+    /* Logo Styling */
+    #logo {
+      position: absolute;
+      top: 30%; /* Adjusted to move the logo lower */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 350px; /* Increased size of the logo */
+      animation: bounce 1s infinite; /* Apply bounce animation */
+      box-shadow: 0 0 10px #0ff, 0 0 20px #0ff; /* Glowing outline */
+    }
+
+    /* Bounce Animation for the Logo */
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateX(-50%) translateY(0); /* Start and end at the same position */
+      }
+      50% {
+        transform: translateX(-50%) translateY(-20px); /* Move up at the middle of the animation */
+      }
+    }
+
   </style>
 </head>
 <body>
+  <div id="social-icons">
+    <a href="https://twitter.com" target="_blank" class="social-icon" id="twitter-icon">
+      <img src="xicon.avif" alt="Twitter" />
+    </a>
+    <a href="https://pumpfun.com" target="_blank" class="social-icon" id="pumpfun-icon">
+      <img src="pumpfunicon.webp" alt="PumpFun" />
+    </a>
+    <a href="https://discord.com/invite/your-discord-link" target="_blank" class="social-icon" id="discord-icon">
+      <img src="discordicon.png" alt="Discord" />
+    </a>
+  </div>
+
   <div id="dj-unlock">
     <h1 class="neon-glow">🎧 Mix to Unlock $GAMBLR</h1>
     <div id="deck">
@@ -169,11 +238,19 @@
 
   <div id="main-site">
     <section class="section" id="welcome">
+      <!-- Video background -->
+      <video autoplay muted loop>
+        <source src="uhd_30fps.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
       <h1 class="neon-glow">🎉 Welcome to $GAMBLR</h1>
       <p>The DJ dev is spinning 24/7 until we hit the moon!</p>
       <audio autoplay loop>
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
       </audio>
+
+      <!-- Logo on top of the video -->
+      <img src="logo.png" alt="Logo" id="logo">
     </section>
 
     <section class="section" id="how-to-buy">
@@ -206,93 +283,121 @@
         <h3>🪩 Party Mode</h3>
         <p>Every holder gets exclusive access to DJ drops and community events.</p>
       </div>
-    </section><section class="section" id="dj-board" style="background:#000 url('/mnt/data/4fe5e0a0-be5b-4fa1-910d-6989777687f7.png') no-repeat center center/cover; color:#0f0;">
-  <h2 class="neon-glow">🎚️ DJ Live Deck</h2>
-  <p style="text-align:center;">Drop your beats, scratch, and mix like a real DJ.</p>
+    </section>
 
-  <div style="max-width:1200px;margin:40px auto;position:relative;height:700px;border-radius:12px;box-shadow:0 0 30px #0f0;">
+    <section class="section" id="twitch-stream">
+      <h2 class="neon-glow">📺 Watch Live on Twitch</h2>
+      <iframe
+        src="https://player.twitch.tv/?channel=afterhoursaz&parent=localhost"
+        height="400"
+        width="100%"
+        allowfullscreen=""
+        frameborder="0"
+        scrolling="no"
+        allow="autoplay; encrypted-media"
+      ></iframe>
+    </section>
 
-    <!-- Jogwheel Visuals -->
-    <div style="position:absolute;top:150px;left:150px;width:180px;height:180px;border-radius:50%;background:#111 url('/mnt/data/db220221-6795-4697-a95e-cd230c7d580f.png') center center/cover;border:4px solid lime;box-shadow:0 0 20px lime;"></div>
-    <div style="position:absolute;top:150px;right:150px;width:180px;height:180px;border-radius:50%;background:#111 url('/mnt/data/db220221-6795-4697-a95e-cd230c7d580f.png') center center/cover;border:4px solid lime;box-shadow:0 0 20px lime;"></div>
+    <section class="section" id="dj-board" style="background:#000 url('/mnt/data/4fe5e0a0-be5b-4fa1-910d-6989777687f7.png') no-repeat center center/cover; color:#0f0;">
+      <h2 class="neon-glow">🎚️ DJ Live Deck</h2>
+      <p style="text-align:center;">Drop your beats, scratch, and mix like a real DJ.</p>
+      <div style="max-width:1200px;margin:40px auto;position:relative;height:700px;border-radius:12px;box-shadow:0 0 30px #0f0;">
+        <!-- Jogwheel Visuals -->
+        <div style="position:absolute;top:150px;left:150px;width:180px;height:180px;border-radius:50%;background:#111 url('/mnt/data/db220221-6795-4697-a95e-cd230c7d580f.png') center center/cover;border:4px solid lime;box-shadow:0 0 20px lime;"></div>
+        <div style="position:absolute;top:150px;right:150px;width:180px;height:180px;border-radius:50%;background:#111 url('/mnt/data/db220221-6795-4697-a95e-cd230c7d580f.png') center center/cover;border:4px solid lime;box-shadow:0 0 20px lime;"></div>
 
-    <!-- Deck Buttons -->
-    <button onclick="playDeck('track1')" style="position:absolute;top:350px;left:180px;width:100px;height:35px;background:#000;color:#0f0;border:2px solid #0f0;border-radius:6px;">▶ Play A</button>
-    <button onclick="playDeck('track2')" style="position:absolute;top:350px;right:180px;width:100px;height:35px;background:#000;color:#0f0;border:2px solid #0f0;border-radius:6px;">▶ Play B</button>
+        <!-- Deck Buttons -->
+        <button onclick="playDeck('track1')" style="position:absolute;top:350px;left:180px;width:100px;height:35px;background:#000;color:#0f0;border:2px solid #0f0;border-radius:6px;">▶ Play A</button>
+        <button onclick="playDeck('track2')" style="position:absolute;top:350px;right:180px;width:100px;height:35px;background:#000;color:#0f0;border:2px solid #0f0;border-radius:6px;">▶ Play B</button>
 
-    <!-- Crossfader -->
-    <label for="crossfader" style="position:absolute;top:420px;left:calc(50% - 50px);color:#0f0;font-size:14px;">Crossfader</label>
-    <input type="range" min="0" max="100" value="50" id="crossfader" style="position:absolute;top:450px;left:calc(50% - 150px);width:300px;">
+        <!-- Crossfader -->
+        <label for="crossfader" style="position:absolute;top:420px;left:calc(50% - 50px);color:#0f0;font-size:14px;">Crossfader</label>
+        <input type="range" min="0" max="100" value="50" id="crossfader" style="position:absolute;top:450px;left:calc(50% - 150px);width:300px;">
 
-    <!-- Volume -->
-    <label for="volume" style="position:absolute;top:500px;left:calc(50% - 50px);color:#0f0;font-size:14px;">Volume</label>
-    <input type="range" id="volume" min="0" max="1" step="0.01" value="1" onchange="setVolume(this.value)" style="position:absolute;top:530px;left:calc(50% - 150px);width:300px;">
+        <!-- Volume -->
+        <label for="volume" style="position:absolute;top:500px;left:calc(50% - 50px);color:#0f0;font-size:14px;">Volume</label>
+        <input type="range" id="volume" min="0" max="1" step="0.01" value="1" onchange="setVolume(this.value)" style="position:absolute;top:530px;left:calc(50% - 150px);width:300px;">
 
-    <!-- Stop -->
-    <button onclick="stopAllSounds()" style="position:absolute;top:580px;left:calc(50% - 50px);width:100px;height:35px;background:#000;color:red;border:2px solid red;border-radius:6px;">⛔ Stop</button>
-  </div>
-</section>
+        <!-- Stop -->
+        <button onclick="stopAllSounds()" style="position:absolute;top:580px;left:calc(50% - 50px);width:100px;height:35px;background:#000;color:red;border:2px solid red;border-radius:6px;">⛔ Stop</button>
+      </div>
+    </section>
 
-<audio id="track1" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"></audio>
-<audio id="track2" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"></audio>
+    <audio id="track1" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"></audio>
+    <audio id="track2" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"></audio>
 
-<script>
-  const tracks = {
-    track1: document.getElementById('track1'),
-    track2: document.getElementById('track2')
-  };
-
-  function playDeck(id) {
-    const track = tracks[id];
-    if (track.paused) {
-      track.volume = document.getElementById('volume').value;
-      track.play();
-    } else {
-      track.pause();
-    }
-  }
-
-  function stopAllSounds() {
-    Object.values(tracks).forEach(track => {
-      track.pause();
-      track.currentTime = 0;
-    });
-  }
-
-  function setVolume(val) {
-    Object.values(tracks).forEach(track => {
-      track.volume = val;
-    });
-  }
-</script>
-
-  <script>
-    let spunTT1 = false;
-    let spunTT2 = false;
-
-    document.getElementById('tt1').addEventListener('click', () => {
-      const tt = document.getElementById('tt1');
-      tt.classList.add('spinning');
-      spunTT1 = true;
-      setTimeout(() => tt.classList.remove('spinning'), 2000);
-    });
-
-    document.getElementById('tt2').addEventListener('click', () => {
-      const tt = document.getElementById('tt2');
-      tt.classList.add('spinning');
-      spunTT2 = true;
-      setTimeout(() => tt.classList.remove('spinning'), 2000);
-    });
-
-    function tryUnlock() {
-      if (spunTT1 && spunTT2) {
-        document.getElementById('dj-unlock').style.display = 'none';
-        document.getElementById('main-site').style.display = 'block';
-      } else {
-        alert("Spin both decks to unlock the site!");
+    <script>
+      // Confetti effect targeting specific areas (video and logo area)
+      function startConfetti(x, y) {
+        confetti({
+          particleCount: 150,
+          spread: 180,
+          origin: { x: x, y: y },
+          scalar: 0.7,  // Bigger confetti particles
+        });
       }
-    }
-  </script>
+      
+      // Trigger confetti around the video
+      startConfetti(0.5, 0.5);  // Center of the video area
+      
+      // Trigger confetti around the logo
+      startConfetti(0.5, 0.35);  // Center around the logo
 
+      const tracks = {
+        track1: document.getElementById('track1'),
+        track2: document.getElementById('track2')
+      };
+
+      function playDeck(id) {
+        const track = tracks[id];
+        if (track.paused) {
+          track.volume = document.getElementById('volume').value;
+          track.play();
+        } else {
+          track.pause();
+        }
+      }
+
+      function stopAllSounds() {
+        Object.values(tracks).forEach(track => {
+          track.pause();
+          track.currentTime = 0;
+        });
+      }
+
+      function setVolume(val) {
+        Object.values(tracks).forEach(track => {
+          track.volume = val;
+        });
+      }
+    </script>
+
+    <script>
+      let spunTT1 = false;
+      let spunTT2 = false;
+
+      document.getElementById('tt1').addEventListener('click', () => {
+        const tt = document.getElementById('tt1');
+        tt.classList.add('spinning');
+        spunTT1 = true;
+        setTimeout(() => tt.classList.remove('spinning'), 2000);
+      });
+
+      document.getElementById('tt2').addEventListener('click', () => {
+        const tt = document.getElementById('tt2');
+        tt.classList.add('spinning');
+        spunTT2 = true;
+        setTimeout(() => tt.classList.remove('spinning'), 2000);
+      });
+
+      function tryUnlock() {
+        if (spunTT1 && spunTT2) {
+          document.getElementById('dj-unlock').style.display = 'none';
+          document.getElementById('main-site').style.display = 'block';
+        } else {
+          alert("Spin both decks to unlock the site!");
+        }
+      }
+    </script>
 </body>
 </html>
